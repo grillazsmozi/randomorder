@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Order Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #randomOrder {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #randomOrder ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #randomOrder li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Random Order Generator</h1>
+
+    <table id="itemsTable">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Modifiers</th>
+                <th>Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Item 1</td>
+                <td>Modifier 1, Modifier 2, Modifier 3</td>
+                <td>Kicsi</td>
+            </tr>
+            <tr>
+                <td>Item 2</td>
+                <td>Modifier 4, Modifier 5, Modifier 6</td>
+                <td>Közepes</td>
+            </tr>
+            <tr>
+                <td>Item 3</td>
+                <td>Modifier 7, Modifier 8, Modifier 9</td>
+                <td>Nagy</td>
+            </tr>
+            <!-- Add more items as needed -->
+        </tbody>
+    </table>
+
+    <button onclick="generateRandomOrder()">Generate Random Order</button>
+
+    <h2>Random Order:</h2>
+    <div id="randomOrder"></div>
+
+    <script>
+        function getRandomModifiers(modifiers) {
+            let shuffled = modifiers.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, Math.floor(Math.random() * 3) + 1);
+        }
+
+        function generateRandomOrder() {
+            const sizes = ['kicsi (100g 200ml 2db)', 'közepes (200g 300ml 4db)', 'nagy (300g 500ml 6db)'];
+            const items = [
+                { name: 'Almdudler', modifiers: ['Jég'] },
+                { name: 'Cappuchino', modifiers: ['Kókusztej','Laktózmentes tej','Tej','cukor','méz','édesítőszer','Tejszínhab'] },
+                { name: 'Coca Cola', modifiers: ['Jég'] },
+                { name: 'E. Tonic', modifiers: ['Jég'] },
+                { name: 'Espresso', modifiers: ['Kókusztej','Laktózmentes tej','Tej','cukor','méz','édesítőszer','Tejszínhab'] },
+                { name: 'Fanta', modifiers: ['Jég'] },
+                { name: 'IceTea Barack', modifiers: ['Jég'] },
+                { name: 'IceTea Citrom', modifiers: ['Jég'] },
+                { name: 'Latte', modifiers: ['Kókusztej','Laktózmentes tej','Tej','cukor','méz','édesítőszer','Tejszínhab'] },
+                { name: 'Limonádé', modifiers: ['Jég'] },
+                { name: 'Mocha', modifiers: ['Kókusztej','Laktózmentes tej','Tej','cukor','méz','édesítőszer','Tejszínhab'] },
+                { name: 'RedBull', modifiers: ['Jég'] },
+                { name: 'Szódavíz', modifiers: ['Jég'] },
+                { name: 'Csapvíz', modifiers: ['Jég'] },
+                { name: 'Tonic', modifiers: ['Jég'] },
+                { name: 'Bajor Kolbász', modifiers: [''] },
+                { name: 'Magyaros Kolbász', modifiers: [''] },
+                { name: 'Sajtos Kolbász', modifiers: [''] },
+                { name: 'Cucumber Madness', modifiers: [''] },
+                { name: 'Sex on the beach', modifiers: [''] },
+                { name: 'Virgin Mojito', modifiers: [''] },
+                { name: 'Mojito', modifiers: [''] },
+                { name: 'Margarita', modifiers: [''] },
+                { name: 'Amerikai Káposzta Saláta', modifiers: [''] },
+                { name: 'Amerikai Palacsinta', modifiers: [''] },
+                { name: 'Gyümisali', modifiers: ['banán','eper','ananász','alma','barack'] },
+                // Add more items as needed
+            ];
+
+            let order = [];
+            for (let i = 0; i < 5; i++) {
+                const randomItem = items[Math.floor(Math.random() * items.length)];
+                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+                const randomModifiers = getRandomModifiers(randomItem.modifiers);
+                order.push(`<li><strong>${randomItem.name}</strong> with ${randomModifiers.join(', ')} - Size: ${randomSize}</li>`);
+            }
+
+            const orderDiv = document.getElementById('randomOrder');
+            orderDiv.innerHTML = `<ul>${order.join('')}</ul>`;
+        }
+    </script>
+    
+</body>
+</html>
